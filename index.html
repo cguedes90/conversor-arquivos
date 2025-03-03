@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conversor de Arquivos Online</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 300px;
+        }
+        input, select, button {
+            width: 100%;
+            margin-top: 10px;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        button {
+            background-color: #28a745;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+        .download-link {
+            display: none;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Conversor de Arquivos Online</h2>
+        <input type="file" id="fileInput">
+        <select id="formatSelect">
+            <option value="pdf">PDF</option>
+            <option value="docx">Word (DOCX)</option>
+            <option value="jpg">JPG</option>
+            <option value="png">PNG</option>
+            <option value="mp3">MP3</option>
+            <option value="wav">WAV</option>
+        </select>
+        <button onclick="convertFile()">Converter Arquivo</button>
+        <a id="downloadLink" class="download-link" download>Baixar Arquivo Convertido</a>
+    </div>
+
+    <script>
+        function convertFile() {
+            const fileInput = document.getElementById('fileInput');
+            const formatSelect = document.getElementById('formatSelect');
+            const downloadLink = document.getElementById('downloadLink');
+
+            if (!fileInput.files.length) {
+                alert("Por favor, selecione um arquivo para converter.");
+                return;
+            }
+
+            const file = fileInput.files[0];
+            const newFormat = formatSelect.value;
+            const newFileName = file.name.split(".")[0] + '.' + newFormat;
+            
+            // Simulando a conversão apenas alterando o nome do arquivo
+            setTimeout(() => {
+                downloadLink.href = URL.createObjectURL(file);
+                downloadLink.download = newFileName;
+                downloadLink.innerText = `Baixar ${newFileName}`;
+                downloadLink.style.display = 'block';
+            }, 2000);
+        }
+    </script>
+</body>
+</html>
